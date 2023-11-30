@@ -1,0 +1,59 @@
+<div
+  class="search-container"
+  style="width: 800px; margin-top: 30px; margin-left: 10%"
+>
+  <input
+    type="search"
+    (keydown)="onKeyDown($event)"
+    #myInput
+    name="name"
+    id=""
+  />
+  <input
+    type="search"
+    [formControl]="term"
+    class="form-control"
+    placeholder="search"
+  />
+</div>
+<div *ngIf="results">
+  <li *ngFor="let result of results">{{ result.name.common | json }}</li>
+</div>
+{{ term.value | json }}
+<h2>{{ msg }}</h2>
+<div class="class" [ngClass]="isSpecial ? 'color-red' : ''">
+  <h1>special</h1>
+  <button (click)="change()" class="btn btn-primary">change color</button>
+  <h1>normal heading</h1>
+  <h1 appCustom2>custom heading</h1>
+  <h1>custom heading2</h1>
+  <h1 appCustom2>custom heading3</h1>
+  <h1>custom heading4</h1>
+  <h2 appSetBackGroundColorBlue>custom blue background</h2>
+</div>
+<div class="structral-exam" *ngIf="display" appSetBackGroundColorBlue>
+  <h2>heading example structural</h2>
+  <ng-template #myText>
+    <h2>when above heading is false this will be shown</h2>
+  </ng-template>
+</div>
+<!-- <div appClass [displayStyle]="{ container: true, 'change-font': true }"> -->
+<div [appClass]="{ container: true, 'change-font': true }">
+  <h1>this is the example for the custom ng classs</h1>
+</div>
+<div class="structural-dirivative" *appStructuralExample="isAvailable">
+  <h1>structural directive custom</h1>
+</div>
+<button class="btn btn-dark" (click)="isAvailable = !isAvailable">click</button>
+<div class="async-pipe-container" *ngFor="let x of users$ | async">
+  <h1>{{ x.status }}:{{ x.age }}</h1>
+</div>
+<div class="status" *ngFor="let x of status$ | async">
+  {{ x | json }}
+</div>
+<div class="filtered" *ngFor="let x of filtered$ | async">
+  {{ x | json }}
+</div>
+<div class="behaiviour" *ngIf="user$ | async">
+  {{ (user$ | async)?.age }}ages
+</div>

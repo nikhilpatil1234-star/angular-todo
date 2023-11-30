@@ -1,0 +1,10 @@
+<p>card-details works!</p>
+<!-- {{ data | json }} -->
+<div style="display: flex; flex-wrap: wrap">
+  <div class="image-container" *ngFor="let x of data">
+    <div style="margin: 0px 10px">
+      <img [src]="x.email" alt="hello" width="250px" />
+    </div>
+  </div>
+</div>
+<app-testingcomp />

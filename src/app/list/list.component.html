@@ -1,0 +1,147 @@
+<nav class="navbar bg-dark">
+  <div class="nav-bar-container container d-flex">
+    <h2 style="color: aliceblue" routerLink="/search">HOME</h2>
+    <button
+      class="btn btn-success"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Add employee
+    </button>
+  </div>
+</nav>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">ADD Employee</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="employeeForm">
+          <div class="mb-3">
+            <label for="name" class="form-label"> Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="enter your name"
+              formControlName="name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="enter your email"
+              formControlName="email"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label"> Phone Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              placeholder="enter your phone number"
+              formControlName="phone"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label"> City Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              placeholder="enter your city"
+              formControlName="city"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          (click)="AddEmployee(this.employeeForm.value)"
+          class="btn btn-dark"
+          data-bs-dismiss="modal"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <!-- <input
+    type="search"
+    [(ngModel)]="searchTxt"
+    class="form-control"
+    style="width: 800px; margin: auto"
+    placeholder="search"
+  />
+  {{ searchTxt }} -->
+  <!-- <app-test></app-test>
+  <app-test2></app-test2> -->
+
+  <table class="table container">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">City</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of empData; let index = index">
+        <th scope="row">{{ index + 1 }}</th>
+        <td>{{ x?.name }}</td>
+        <td>{{ x?.email }}</td>
+        <td>{{ x?.phone }}</td>
+        <td>{{ x?.city }}</td>
+        <td>
+          <button
+            class="btn btn-warning"
+            style="margin: 0px 10px"
+            routerLink="/update/{{ x?.id }}"
+          >
+            Edit
+          </button>
+          <button class="btn btn-danger" (click)="DeleteEmp(x.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h1 style="margin-top: 10%; color: red">{{ errorMsg }}</h1>
+<app-card-details [data]="empData" />
